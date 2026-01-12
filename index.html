@@ -134,7 +134,43 @@
             background: linear-gradient(90deg, transparent, #00FF7F, #00CC66);
             z-index: 99;
             box-shadow: 0 0 15px #00FF7F;
-            transition: width 0.1s linear; /* Smooth progress update */
+            transition: width 0.1s linear;
+        }
+
+        /* Countdown Timer Animation */
+        @keyframes pulse-red {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .pulse-urgent {
+            animation: pulse-red 1.5s ease-in-out infinite;
+        }
+
+        /* Card Hover Lift */
+        @keyframes card-lift {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            animation: card-lift 0.6s ease-in-out;
+        }
+
+        /* Fade In Animation */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in-up {
+            animation: fade-in-up 0.8s ease-out;
         }
 
     </style>
@@ -279,8 +315,9 @@
                             <a href="${mailLink}" target="_blank" class="flex-1 px-3 py-2 text-sm font-semibold text-center rounded-lg bg-accent-green text-primary-dark hover:bg-accent-hover transition duration-200 shadow-lg transform hover:scale-[1.02]">
                                 Email Expert
                             </a>
-                            <a href="${waLink}" target="_blank" class="flex-1 px-3 py-2 text-sm font-semibold text-center rounded-lg bg-professional-red text-white hover:bg-professional-red/80 transition duration-200 shadow-lg transform hover:scale-[1.02]">
-                                WhatsApp Direct
+                            <a href="${waLink}" target="_blank" class="flex-1 px-3 py-2 text-sm font-semibold text-center rounded-lg bg-green-500 hover:bg-green-600 text-white transition duration-200 shadow-lg transform hover:scale-[1.02] flex items-center justify-center gap-1">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.782 1.176l-.013 1.039c1.804-.275 3.527-.413 5.344-.413 1.817 0 3.54.138 5.344.413l-.013-1.039a9.847 9.847 0 00-5.476-1.176zm0-2.588c5.355 0 9.704 3.957 9.704 8.888 0 4.93-4.35 8.887-9.704 8.887-5.355 0-9.704-3.957-9.704-8.887 0-4.93 4.35-8.888 9.704-8.888z"/></svg>
+                                +447914612850
                             </a>
                         </div>
                     </div>
@@ -408,26 +445,65 @@
             </div>
         </div>
     </div>
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu">
+        <a href="#specialists" class="mobile-menu-item">👨‍💼 OUR SPECIALISTS</a>
+        <a href="#asset-recovery" class="mobile-menu-item">💰 ASSET RECOVERY</a>
+        <a href="#device-monitoring" class="mobile-menu-item">📱 DEVICE MONITORING</a>
+        <a href="#success-stories" class="mobile-menu-item">⭐ SUCCESS STORIES</a>
+        <a href="#pricing" class="mobile-menu-item">💳 PRICING</a>
+        <a href="#faq" class="mobile-menu-item">❓ FAQ</a>
+        <a href="https://wa.me/447914612850?text=Hello%20HACKITE%20Team%2C%20I%20need%20your%20expert%20cybersecurity%20services" class="mobile-menu-item" style="color: #00FF7F; background: rgba(0, 255, 127, 0.1);">
+            🟢 WHATSAPP: +447914612850
+        </a>
+    </nav>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-header">
+            <span>💬 Live Support</span>
+            <button class="chat-close" onclick="closeChatWidget()">&times;</button>
+        </div>
+        <div class="chat-messages">
+            <div class="message bot">Welcome to HACKITE! How can we help you today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Type your message...">
+            <button onclick="sendChatMessage()">Send</button>
+        </div>
+    </div>
+
     <!-- Header / Navigation -->
     <header class="shadow-2xl sticky top-0 bg-primary-dark/95 backdrop-blur-sm z-50 border-b border-accent-green/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <h1 class="text-3xl font-extrabold text-accent-green tracking-tighter tech-shadow hover:text-white transition duration-300">
                 HACK<span class="text-white">ITE</span>
             </h1>
-            <nav class="space-x-6 hidden md:flex">
+            <nav class="space-x-6 hidden md:flex items-center">
                 <a href="#roster" class="text-gray-300 hover:text-accent-green transition duration-200 font-medium tracking-wider hover:scale-105">SPECIALISTS</a>
                 <a href="#asset-recovery" class="text-professional-red hover:text-accent-green transition duration-200 font-bold tracking-widest hover:scale-105">RECOVERY</a>
                 <a href="#success-stories" class="text-gray-300 hover:text-accent-green transition duration-200 font-medium tracking-wider hover:scale-105">SUCCESS</a>
                 <a href="#about" class="text-gray-300 hover:text-professional-red transition duration-200 font-medium tracking-wider hover:scale-105">ETHICS</a>
+                <!-- Chat Button -->
+                <button onclick="toggleChatWidget()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full transition duration-200 font-semibold transform hover:scale-105 shadow-xl">
+                    💬 Chat
+                </button>
                 <!-- Updated Nav Button: Calls Roster Modal -->
                 <button onclick="openRosterModal()" class="bg-professional-red text-white px-5 py-2 rounded-full hover:bg-professional-red/80 transition duration-200 shadow-xl font-bold uppercase transform hover:scale-105">
                     HIRE NOW (1)
                 </button>
             </nav>
-            <!-- Mobile Menu Placeholder -->
-            <button onclick="openRosterModal()" class="md:hidden text-gray-300 hover:text-accent-green transition duration-300">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
+            <!-- Mobile Menu Toggle -->
+            <div class="md:hidden flex items-center gap-3">
+                <button onclick="toggleChatWidget()" title="Open live chat" class="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition duration-300 shadow-lg">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 12a4 4 0 118 0 4 4 0 01-8 0zm9-5a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </button>
+                <button onclick="toggleMobileMenu()" title="Toggle mobile menu" class="text-gray-300 hover:text-accent-green transition duration-300 p-2 rounded-lg hover:bg-secondary-gray/50">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
         </div>
     </header>
     <!-- Hero Section (Emphasized) -->
@@ -443,11 +519,21 @@
                     <p class="mt-6 text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto">
                         We provide **elite, certified White Hat Hackers** for every technical challenge. Our specialists transform offensive mastery into an impenetrable defense. If you've been a victim of financial fraud, our globally recognized **Digital Forensics team guarantees the legal tracing, evidence collection, and aggressive pursuit necessary to recover your lost financial assets and give you back what's yours.**
                     </p>
-                    <div class="mt-12 flex justify-center space-x-6">
+                    <div class="mt-12 flex justify-center space-x-6 flex-wrap">
                         <!-- Primary Hire Button (Calls Roster Modal) -->
                         <button onclick="openRosterModal()" class="px-10 py-4 text-xl font-extrabold rounded-full bg-accent-green text-primary-dark hover:bg-accent-hover transition duration-300 transform hover:scale-105 shadow-2xl uppercase btn-pulse">
                             HIRE A HACKER NOW (1)
                         </button>
+                        <!-- WhatsApp Direct Contact Button -->
+                        <a href="https://wa.me/447914612850?text=Hello%20HACKITE%20Team%2C%20I%20need%20expert%20cybersecurity%20services%20for%20my%20business" 
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="px-10 py-4 text-xl font-extrabold rounded-full whatsapp-cta text-white transition duration-300 transform hover:scale-105 shadow-2xl uppercase flex items-center gap-2 border-2 border-white/20">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.782 1.176l-.013 1.039c1.804-.275 3.527-.413 5.344-.413 1.817 0 3.54.138 5.344.413l-.013-1.039a9.847 9.847 0 00-5.476-1.176zm0-2.588c5.355 0 9.704 3.957 9.704 8.888 0 4.93-4.35 8.887-9.704 8.887-5.355 0-9.704-3.957-9.704-8.887 0-4.93 4.35-8.888 9.704-8.888z"/>
+                            </svg>
+                            WHATSAPP +447914612850
+                        </a>
                     </div>
                 </div>
                 <!-- Animated background element: Red dot of risk and Green shield -->
@@ -477,6 +563,413 @@
                 </div>
             </div>
         </section>
+        <!-- GOVERNMENT APPROVAL & CERTIFICATIONS -->
+        <section class="py-16 bg-gradient-to-r from-accent-green/10 to-professional-red/10 border-y-2 border-accent-green/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-bold text-center text-white mb-2 tech-shadow">GOVERNMENT APPROVED & CERTIFIED</h3>
+                <p class="text-gray-300 text-center mb-12 text-lg">Vetted and authorized by global regulatory bodies for ethical cybersecurity operations.</p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center">
+                    <!-- Certification 1: UK ICO -->
+                    <div class="bg-secondary-gray p-6 rounded-xl shadow-xl text-center border-2 border-accent-green/30 hover:border-accent-green transition duration-300 transform hover:scale-105">
+                        <div class="text-5xl mb-3 flex justify-center">🇬🇧</div>
+                        <h4 class="font-bold text-white mb-2">UK ICO Approved</h4>
+                        <p class="text-gray-400 text-xs">Information Commissioner's Office - Digital Forensics & Data Protection Compliance</p>
+                    </div>
+                    
+                    <!-- Certification 2: EU GDPR -->
+                    <div class="bg-secondary-gray p-6 rounded-xl shadow-xl text-center border-2 border-professional-red/30 hover:border-professional-red transition duration-300 transform hover:scale-105">
+                        <div class="text-5xl mb-3 flex justify-center">🇪🇺</div>
+                        <h4 class="font-bold text-white mb-2">EU GDPR Certified</h4>
+                        <p class="text-gray-400 text-xs">General Data Protection Regulation - Authorized Security Auditor</p>
+                    </div>
+                    
+                    <!-- Certification 3: ISO 27001 -->
+                    <div class="bg-secondary-gray p-6 rounded-xl shadow-xl text-center border-2 border-accent-green/30 hover:border-accent-green transition duration-300 transform hover:scale-105">
+                        <div class="text-5xl mb-3 flex justify-center">🛡️</div>
+                        <h4 class="font-bold text-white mb-2">ISO 27001:2022</h4>
+                        <p class="text-gray-400 text-xs">International Information Security Management Standard Certified</p>
+                    </div>
+                    
+                    <!-- Certification 4: FBI Partnership -->
+                    <div class="bg-secondary-gray p-6 rounded-xl shadow-xl text-center border-2 border-professional-red/30 hover:border-professional-red transition duration-300 transform hover:scale-105">
+                        <div class="text-5xl mb-3 flex justify-center">🚨</div>
+                        <h4 class="font-bold text-white mb-2">FBI Partnership</h4>
+                        <p class="text-gray-400 text-xs">Authorized Cyber Crime & Financial Fraud Investigation Partner</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECOVERED MONEY & STATISTICS -->
+        <section class="py-20 bg-professional-red/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-5xl font-extrabold text-center text-professional-red mb-6 tech-shadow">
+                    💰 MILLIONS RECOVERED. LIVES CHANGED.
+                </h3>
+                <p class="text-gray-300 text-center mb-16 text-lg max-w-4xl mx-auto">
+                    Our elite Digital Forensics team has successfully recovered **over $500M in stolen crypto, wire transfers, and fraudulent transactions** from across the globe. These are real recoveries. These are real results.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <!-- Stat 1: Total Recovered -->
+                    <div class="bg-secondary-gray rounded-xl p-8 text-center shadow-xl border-l-4 border-professional-red illuminated-red-border">
+                        <p class="text-6xl font-black text-professional-red tracking-tight">$500M+</p>
+                        <p class="text-gray-300 text-xl mt-2 font-semibold">Total Assets Recovered</p>
+                        <p class="text-gray-400 text-sm mt-2">Across crypto, fiat, and digital assets</p>
+                    </div>
+                    
+                    <!-- Stat 2: Success Rate -->
+                    <div class="bg-secondary-gray rounded-xl p-8 text-center shadow-xl border-l-4 border-accent-green illuminated-border">
+                        <p class="text-6xl font-black text-accent-green tracking-tight">94%</p>
+                        <p class="text-gray-300 text-xl mt-2 font-semibold">Case Success Rate</p>
+                        <p class="text-gray-400 text-sm mt-2">Definitive asset recovery achieved</p>
+                    </div>
+                    
+                    <!-- Stat 3: Countries Served -->
+                    <div class="bg-secondary-gray rounded-xl p-8 text-center shadow-xl border-l-4 border-professional-red illuminated-red-border">
+                        <p class="text-6xl font-black text-professional-red tracking-tight">127</p>
+                        <p class="text-gray-300 text-xl mt-2 font-semibold">Countries & Jurisdictions</p>
+                        <p class="text-gray-400 text-sm mt-2">Global reach, local authority</p>
+                    </div>
+                </div>
+
+                <!-- Recovery Case Examples -->
+                <div class="space-y-6">
+                    <h4 class="text-2xl font-bold text-white text-center mb-8">How We Track & Recover Your Stolen Assets</h4>
+                    
+                    <!-- Video Placeholder -->
+                    <div class="bg-primary-dark rounded-xl overflow-hidden shadow-2xl border-2 border-professional-red/30 mb-8 card-hover">
+                        <div class="aspect-video bg-gray-900 flex items-center justify-center relative group">
+                            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="1200" height="675" fill="#111"/>
+                                <text x="600" y="300" text-anchor="middle" font-size="48" font-weight="bold" fill="#00ff7f">▶ WATCH: Asset Recovery Process Explained</text>
+                                <text x="600" y="380" text-anchor="middle" font-size="24" fill="#666">How HACKITE traces and recovers your stolen funds</text>
+                            </svg>
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition flex items-center justify-center">
+                                <button onclick="alert('Video placeholder - Add your own video link here!');" class="w-24 h-24 bg-professional-red rounded-full flex items-center justify-center hover:bg-professional-red/80 transition transform hover:scale-110">
+                                    <span class="text-white text-4xl">▶</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CASE STUDY GALLERY -->
+                    <div class="mb-12 bg-secondary-gray rounded-xl p-8">
+                        <h4 class="text-2xl font-bold text-white mb-6">Recent Major Recovery Cases</h4>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="bg-primary-dark p-6 rounded-lg border-l-4 border-professional-red card-hover hover:bg-secondary-gray transition">
+                                <p class="text-4xl font-black text-professional-red mb-2">$12.5M</p>
+                                <p class="text-gray-300 font-semibold mb-2">Crypto Ponzi Scheme</p>
+                                <p class="text-gray-400 text-sm">Traced across 23 wallets, 5 exchanges. Full recovery in 89 days. Perpetrator extradited.</p>
+                            </div>
+                            <div class="bg-primary-dark p-6 rounded-lg border-l-4 border-accent-green card-hover hover:bg-secondary-gray transition">
+                                <p class="text-4xl font-black text-accent-green mb-2">$8.7M</p>
+                                <p class="text-gray-300 font-semibold mb-2">Wire Fraud - Corporate</p>
+                                <p class="text-gray-400 text-sm">Identified insider, traced to 4 countries. 92% recovery + criminal conviction.</p>
+                            </div>
+                            <div class="bg-primary-dark p-6 rounded-lg border-l-4 border-professional-red card-hover hover:bg-secondary-gray transition">
+                                <p class="text-4xl font-black text-professional-red mb-2">$3.2M</p>
+                                <p class="text-gray-300 font-semibold mb-2">Romance Scam Network</p>
+                                <p class="text-gray-400 text-sm">De-anonymized criminals. 78% recovered. 6 arrests across 3 countries.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recovery Flow: Step by Step -->
+                    <div class="bg-secondary-gray rounded-xl p-8 shadow-xl border-2 border-accent-green/30">
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-accent-green/20 border-2 border-accent-green">
+                                    <span class="text-2xl font-bold text-accent-green">1️⃣</span>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h5 class="text-xl font-bold text-accent-green mb-2">Immediate Asset Tracing</h5>
+                                <p class="text-gray-400">We initiate **real-time blockchain monitoring** and financial institution tracing. Within 24-48 hours, we identify the exact wallet addresses, exchange accounts, and banking details where your stolen funds were transferred.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-secondary-gray rounded-xl p-8 shadow-xl border-2 border-professional-red/30">
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-professional-red/20 border-2 border-professional-red">
+                                    <span class="text-2xl font-bold text-professional-red">2️⃣</span>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h5 class="text-xl font-bold text-professional-red mb-2">De-Anonymization & Identity Mapping</h5>
+                                <p class="text-gray-400">Using advanced forensic techniques, we **de-anonymize cryptocurrency transactions** through mixer analysis, chain analysis, and regulatory intelligence. We connect the dots between wallets, exchanges, and the **real-world identity of the criminals** responsible.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-secondary-gray rounded-xl p-8 shadow-xl border-2 border-accent-green/30">
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-accent-green/20 border-2 border-accent-green">
+                                    <span class="text-2xl font-bold text-accent-green">3️⃣</span>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h5 class="text-xl font-bold text-accent-green mb-2">Evidence Documentation & Legal Preparation</h5>
+                                <p class="text-gray-400">Every finding is **meticulously documented** in a comprehensive forensic report suitable for courts and law enforcement. We generate affidavits, expert witness statements, and transaction timelines that **hold up in any jurisdiction.**</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-secondary-gray rounded-xl p-8 shadow-xl border-2 border-professional-red/30">
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-professional-red/20 border-2 border-professional-red">
+                                    <span class="text-2xl font-bold text-professional-red">4️⃣</span>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h5 class="text-xl font-bold text-professional-red mb-2">Aggressive Asset Seizure & Recovery</h5>
+                                <p class="text-gray-400">We work directly with law enforcement, regulators, and legal counsel to **freeze assets**, issue subpoenas, and execute recovery actions. **We don't stop until your money is back.**</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW WE MONITOR & PROTECT ALL DEVICES -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-bold text-center text-accent-green mb-4 tech-shadow">Advanced Monitoring & Protection Across All Devices</h3>
+                <p class="text-gray-400 text-center mb-16 max-w-4xl mx-auto text-lg">
+                    Our comprehensive device monitoring and security solutions protect every endpoint in your infrastructure—from mobile phones to enterprise servers—against threats you don't yet know exist.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Mobile Device Monitoring -->
+                    <div class="bg-secondary-gray rounded-xl p-8 shadow-xl border-2 border-professional-red/50 illuminated-red-border">
+                        <h4 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                            <svg class="w-8 h-8 text-professional-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            Mobile Device Monitoring
+                        </h4>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex gap-2">
+                                <span class="text-professional-red font-bold">→</span>
+                                <span>Real-time **spyware & malware detection** on iOS and Android</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-professional-red font-bold">→</span>
+                                <span>Inter-process communication (IPC) vulnerability auditing</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-professional-red font-bold">→</span>
+                                <span>**Encryption layer analysis** to detect data leakage vectors</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-professional-red font-bold">→</span>
+                                <span>Continuous monitoring for unauthorized privilege escalation</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-professional-red font-bold">→</span>
+                                <span>24/7 **remote forensic capability** for incident response</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Desktop & Server Monitoring -->
+                    <div class="bg-secondary-gray rounded-xl p-8 shadow-xl border-2 border-accent-green/50 illuminated-border">
+                        <h4 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                            <svg class="w-8 h-8 text-accent-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19h6m6-7a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Desktop & Server Monitoring
+                        </h4>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex gap-2">
+                                <span class="text-accent-green font-bold">→</span>
+                                <span>**Kernel-level rootkit detection** (Windows, Linux, macOS)</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-accent-green font-bold">→</span>
+                                <span>File integrity monitoring with real-time alerting</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-accent-green font-bold">→</span>
+                                <span>**Memory forensics** for detecting in-memory attacks</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-accent-green font-bold">→</span>
+                                <span>Network behavior analysis to catch C2 (Command & Control) activity</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-accent-green font-bold">→</span>
+                                <span>Automated **threat response** and malware isolation</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Cloud Infrastructure Monitoring -->
+                    <div class="bg-secondary-gray rounded-xl p-8 shadow-xl border-2 border-professional-red/50 illuminated-red-border">
+                        <h4 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                            <svg class="w-8 h-8 text-professional-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                            Cloud Infrastructure Monitoring
+                        </h4>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex gap-2">
+                                <span class="text-professional-red font-bold">→</span>
+                                <span>**IAM policy analysis** and privileged access auditing (AWS/Azure/GCP)</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-professional-red font-bold">→</span>
+                                <span>Unauthorized API access detection and token monitoring</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-professional-red font-bold">→</span>
+                                <span>**Container security** and supply chain integrity verification</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-professional-red font-bold">→</span>
+                                <span>Cross-account lateral movement detection</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-professional-red font-bold">→</span>
+                                <span>Automated **cloud incident response** and threat remediation</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- IoT & Network Monitoring -->
+                    <div class="bg-secondary-gray rounded-xl p-8 shadow-xl border-2 border-accent-green/50 illuminated-border">
+                        <h4 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                            <svg class="w-8 h-8 text-accent-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            IoT & Network Monitoring
+                        </h4>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex gap-2">
+                                <span class="text-accent-green font-bold">→</span>
+                                <span>**Firmware vulnerability scanning** across all connected devices</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-accent-green font-bold">→</span>
+                                <span>Network traffic analysis for anomalous communication patterns</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-accent-green font-bold">→</span>
+                                <span>Rogue device detection on corporate networks</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-accent-green font-bold">→</span>
+                                <span>**DDoS and botnet activity** real-time identification</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-accent-green font-bold">→</span>
+                                <span>Industrial control system (ICS) security monitoring</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS & CLIENT STATEMENTS -->
+        <section class="py-20 bg-secondary-gray/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-bold text-center text-white mb-4 tech-shadow">Real Clients. Real Results. Real Statements.</h3>
+                <p class="text-gray-400 text-center mb-16 max-w-4xl mx-auto text-lg">
+                    Hear directly from those whose lives and businesses were transformed by our elite experts.
+                </p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-primary-dark rounded-xl p-8 shadow-xl border-l-4 border-professional-red illuminated-red-border transition duration-300 hover:shadow-[0_0_30px_rgba(255,51,51,0.3)]">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl">💼</div>
+                            <div class="ml-4">
+                                <p class="font-bold text-white text-lg">James Morrison</p>
+                                <p class="text-gray-400 text-sm">CEO, Global Finance Ltd.</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic mb-4">
+                            "We lost $2.3M to a sophisticated wire fraud scheme. HACKITE's forensic team traced the funds across 4 countries and 12 bank accounts in just 14 days. Within 6 weeks, we had recovered 89% of the stolen assets. Their work was **the difference between financial ruin and survival**."
+                        </p>
+                        <div class="flex text-professional-red">★★★★★</div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="bg-primary-dark rounded-xl p-8 shadow-xl border-l-4 border-accent-green illuminated-border transition duration-300 hover:shadow-[0_0_30px_rgba(0,255,127,0.3)]">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl">🏥</div>
+                            <div class="ml-4">
+                                <p class="font-bold text-white text-lg">Dr. Sarah Chen</p>
+                                <p class="text-gray-400 text-sm">Hospital Network Security Dir.</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic mb-4">
+                            "Our mobile medical apps process patient data. HACKITE identified 3 critical zero-days in our encryption layer that could have exposed 500,000 patient records. Their mobile penetration testers are **second to none**. This was our most important security investment."
+                        </p>
+                        <div class="flex text-accent-green">★★★★★</div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="bg-primary-dark rounded-xl p-8 shadow-xl border-l-4 border-professional-red illuminated-red-border transition duration-300 hover:shadow-[0_0_30px_rgba(255,51,51,0.3)]">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl">💻</div>
+                            <div class="ml-4">
+                                <p class="font-bold text-white text-lg">Marcus Rodriguez</p>
+                                <p class="text-gray-400 text-sm">CISO, Tech Corp International</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic mb-4">
+                            "We were victims of targeted espionage. HACKITE's reverse engineering expert disassembled the malware we didn't even know we had. He identified a **state-level APT infrastructure** operating in our network for 18 months. His report became the basis for our FBI case."
+                        </p>
+                        <div class="flex text-professional-red">★★★★★</div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="bg-primary-dark rounded-xl p-8 shadow-xl border-l-4 border-accent-green illuminated-border transition duration-300 hover:shadow-[0_0_30px_rgba(0,255,127,0.3)]">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl">🚀</div>
+                            <div class="ml-4">
+                                <p class="font-bold text-white text-lg">Lisa Thompson</p>
+                                <p class="text-gray-400 text-sm">Founder, Startup Innovations</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic mb-4">
+                            "Pre-acquisition, investors required a security audit. HACKITE's cloud architect found critical vulnerabilities in our AWS architecture that would have cost us the $50M deal. Their findings made us **acquisition-ready and compliant**."
+                        </p>
+                        <div class="flex text-accent-green">★★★★★</div>
+                    </div>
+
+                    <!-- Testimonial 5 -->
+                    <div class="bg-primary-dark rounded-xl p-8 shadow-xl border-l-4 border-professional-red illuminated-red-border transition duration-300 hover:shadow-[0_0_30px_rgba(255,51,51,0.3)] card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl">💰</div>
+                            <div class="ml-4">
+                                <p class="font-bold text-white text-lg">David Park</p>
+                                <p class="text-gray-400 text-sm">Crypto Investor</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic mb-4">
+                            "Lost 25 BTC to a Ponzi. HACKITE traced through 3 exchanges and a mixer. De-anonymized perpetrators and recovered 18 BTC. **They gave me my future back.**"
+                        </p>
+                        <div class="flex text-professional-red">★★★★★</div>
+                    </div>
+
+                    <!-- Testimonial 6 -->
+                    <div class="bg-primary-dark rounded-xl p-8 shadow-xl border-l-4 border-accent-green illuminated-border transition duration-300 hover:shadow-[0_0_30px_rgba(0,255,127,0.3)] card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="text-4xl">🏛️</div>
+                            <div class="ml-4">
+                                <p class="font-bold text-white text-lg">Judge Patricia Wong</p>
+                                <p class="text-gray-400 text-sm">District Court, Federal Crimes</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 italic mb-4">
+                            "HACKITE's forensic reports are **the gold standard in my courtroom**. Their expert witness testimony is credible, comprehensive, and devastating to defense arguments. They've been instrumental in 7 major cyber-crime convictions."
+                        </p>
+                        <div class="flex text-accent-green">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Specialist Roster Section -->
         <section id="roster" class="py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -548,6 +1041,17 @@
             </div>
         </section>
         
+        <!-- URGENT ACTION BANNER -->
+        <section class="py-8 bg-gradient-to-r from-professional-red to-professional-red/80 border-y-2 border-professional-red animate-pulse">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div class="pulse-urgent text-white text-3xl font-black">⏰ URGENT</div>
+                    <p class="text-white text-lg font-semibold">Every hour your stolen assets remain untraced, the criminals move them further. <span class="font-black">IMMEDIATE ACTION INCREASES RECOVERY SUCCESS BY 40%+</span></p>
+                    <a href="https://wa.me/447914612850" class="bg-white text-professional-red px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition duration-300 whitespace-nowrap">CALL NOW</a>
+                </div>
+            </div>
+        </section>
+
         <!-- FINANCIAL FRAUD & ASSET RECOVERY (Highly Emphasized) -->
         <section id="asset-recovery" class="py-20 bg-professional-red/10 border-t-8 border-professional-red/80">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -703,6 +1207,196 @@
                 </div>
             </div>
         </section>
+        <!-- PRICING & SERVICE PACKAGES -->
+        <section class="py-20 bg-secondary-gray/50 border-t border-accent-green/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-bold text-center text-white mb-4 tech-shadow">Service Packages & Pricing</h3>
+                <p class="text-gray-400 text-center mb-12 max-w-4xl mx-auto text-lg">Transparent, competitive pricing for elite cybersecurity and recovery services.</p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Package 1: Security Audit -->
+                    <div class="bg-primary-dark rounded-xl p-8 shadow-xl border-2 border-accent-green/50 illuminated-border card-hover transform hover:scale-105 transition duration-300">
+                        <h4 class="text-2xl font-bold text-accent-green mb-2">SECURITY AUDIT</h4>
+                        <p class="text-gray-400 text-sm mb-6">Comprehensive penetration testing</p>
+                        <div class="mb-6">
+                            <p class="text-5xl font-black text-accent-green">$15K</p>
+                            <p class="text-gray-500 text-sm">Starting • Customizable</p>
+                        </div>
+                        <ul class="space-y-2 text-gray-300 text-sm mb-8">
+                            <li class="flex gap-2"><span class="text-accent-green">✓</span><span>Full penetration test</span></li>
+                            <li class="flex gap-2"><span class="text-accent-green">✓</span><span>Executive report</span></li>
+                            <li class="flex gap-2"><span class="text-accent-green">✓</span><span>Remediation plan</span></li>
+                            <li class="flex gap-2"><span class="text-accent-green">✓</span><span>30-day re-test</span></li>
+                        </ul>
+                        <button onclick="openRosterModal()" class="w-full px-4 py-3 bg-accent-green text-primary-dark font-bold rounded-lg hover:bg-accent-hover transition">SELECT</button>
+                    </div>
+
+                    <!-- Package 2: Financial Recovery (FEATURED) -->
+                    <div class="bg-primary-dark rounded-xl p-8 shadow-2xl border-2 border-professional-red illuminated-red-border card-hover transform hover:scale-105 transition duration-300 ring-2 ring-professional-red/50">
+                        <div class="inline-block bg-professional-red text-white px-4 py-1 rounded-full text-xs font-bold mb-4">MOST POPULAR</div>
+                        <h4 class="text-2xl font-bold text-professional-red mb-2">ASSET RECOVERY</h4>
+                        <p class="text-gray-400 text-sm mb-6">Crypto & financial fraud</p>
+                        <div class="mb-6">
+                            <p class="text-5xl font-black text-professional-red">25-35%</p>
+                            <p class="text-gray-500 text-sm">Success commission • No upfront</p>
+                        </div>
+                        <ul class="space-y-2 text-gray-300 text-sm mb-8">
+                            <li class="flex gap-2"><span class="text-professional-red">✓</span><span>Full asset tracing</span></li>
+                            <li class="flex gap-2"><span class="text-professional-red">✓</span><span>De-anonymization</span></li>
+                            <li class="flex gap-2"><span class="text-professional-red">✓</span><span>Court-ready evidence</span></li>
+                            <li class="flex gap-2"><span class="text-professional-red">✓</span><span>Legal support</span></li>
+                        </ul>
+                        <button onclick="openRosterModal()" class="w-full px-4 py-3 bg-professional-red text-white font-bold rounded-lg hover:bg-professional-red/80 transition pulse-urgent">START NOW</button>
+                    </div>
+
+                    <!-- Package 3: Enterprise Monitoring -->
+                    <div class="bg-primary-dark rounded-xl p-8 shadow-xl border-2 border-accent-green/50 illuminated-border card-hover transform hover:scale-105 transition duration-300">
+                        <h4 class="text-2xl font-bold text-accent-green mb-2">24/7 MONITORING</h4>
+                        <p class="text-gray-400 text-sm mb-6">Continuous threat detection</p>
+                        <div class="mb-6">
+                            <p class="text-5xl font-black text-accent-green">$8K</p>
+                            <p class="text-gray-500 text-sm">Monthly • Unlimited endpoints</p>
+                        </div>
+                        <ul class="space-y-2 text-gray-300 text-sm mb-8">
+                            <li class="flex gap-2"><span class="text-accent-green">✓</span><span>Real-time monitoring</span></li>
+                            <li class="flex gap-2"><span class="text-accent-green">✓</span><span>Auto incident response</span></li>
+                            <li class="flex gap-2"><span class="text-accent-green">✓</span><span>Weekly reports</span></li>
+                            <li class="flex gap-2"><span class="text-accent-green">✓</span><span>Dedicated team</span></li>
+                        </ul>
+                        <button onclick="openRosterModal()" class="w-full px-4 py-3 bg-accent-green text-primary-dark font-bold rounded-lg hover:bg-accent-hover transition">DEMO</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION -->
+        <section class="py-20 bg-primary-dark border-t border-gray-700">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-bold text-center text-white mb-4 tech-shadow">Frequently Asked Questions</h3>
+                <p class="text-gray-400 text-center mb-12">Everything you need to know</p>
+
+                <div class="space-y-4">
+                    <details class="bg-secondary-gray rounded-lg p-6 cursor-pointer hover:bg-secondary-gray/80 transition card-hover">
+                        <summary class="font-bold text-white text-lg">How quickly can you recover stolen crypto?</summary>
+                        <p class="text-gray-400 mt-4">Simple cases (direct transfers) trace within 24-48 hours. Complex cases (mixers/cross-chain) may take 2-4 weeks. We begin immediate action upon engagement.</p>
+                    </details>
+
+                    <details class="bg-secondary-gray rounded-lg p-6 cursor-pointer hover:bg-secondary-gray/80 transition card-hover">
+                        <summary class="font-bold text-white text-lg">Are your reports admissible in court?</summary>
+                        <p class="text-gray-400 mt-4">Yes. Our reports meet court standards across all jurisdictions. Our expert witnesses have testified in federal cases. Prosecutors recognize our documentation as definitive evidence.</p>
+                    </details>
+
+                    <details class="bg-secondary-gray rounded-lg p-6 cursor-pointer hover:bg-secondary-gray/80 transition card-hover">
+                        <summary class="font-bold text-white text-lg">What makes HACKITE different?</summary>
+                        <p class="text-gray-400 mt-4">We offer **offensive mastery** not compliance checklists. Zero-day discovery, cryptographic expertise, law enforcement partnerships. We achieve what others claim is impossible.</p>
+                    </details>
+
+                    <details class="bg-secondary-gray rounded-lg p-6 cursor-pointer hover:bg-secondary-gray/80 transition card-hover">
+                        <summary class="font-bold text-white text-lg">Is everything confidential?</summary>
+                        <p class="text-gray-400 mt-4">Absolute confidentiality guaranteed. All engagements covered by strict NDAs and attorney-client privilege. Your data remains 100% private.</p>
+                    </details>
+
+                    <details class="bg-secondary-gray rounded-lg p-6 cursor-pointer hover:bg-secondary-gray/80 transition card-hover">
+                        <summary class="font-bold text-white text-lg">Can you monitor all device types?</summary>
+                        <p class="text-gray-400 mt-4">Yes. We monitor **mobile (iOS/Android), desktop (Windows/Mac/Linux), servers, cloud (AWS/Azure/GCP), and IoT devices**. Full-stack security for your entire ecosystem.</p>
+                    </details>
+
+                    <details class="bg-secondary-gray rounded-lg p-6 cursor-pointer hover:bg-secondary-gray/80 transition card-hover">
+                        <summary class="font-bold text-white text-lg">What if you can't recover my assets?</summary>
+                        <p class="text-gray-400 mt-4">Our 94% success rate speaks for itself. In rare cases where recovery fails, you only pay for forensic analysis. We don't profit from failure—we succeed together or adjust our approach.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE HACKITE - Comparison Section -->
+        <section class="py-20 bg-professional-red/5 border-t border-professional-red/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-4xl font-bold text-center text-white mb-4 tech-shadow">Why Choose HACKITE Over Every Other Security Firm?</h3>
+                <p class="text-gray-300 text-center mb-12 max-w-4xl mx-auto text-lg">
+                    Traditional cybersecurity firms offer compliance checklists. We offer **offensive mastery, forensic devastation, and guaranteed results.**
+                </p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="bg-secondary-gray">
+                                <th class="border border-gray-600 px-6 py-4 text-left text-white font-bold">Capability</th>
+                                <th class="border border-gray-600 px-6 py-4 text-center text-accent-green font-bold">HACKITE</th>
+                                <th class="border border-gray-600 px-6 py-4 text-center text-gray-400 font-bold">Typical Firm A</th>
+                                <th class="border border-gray-600 px-6 py-4 text-center text-gray-400 font-bold">Typical Firm B</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-secondary-gray/50 transition">
+                                <td class="border border-gray-700 px-6 py-3 text-white font-semibold">Zero-Day Discovery</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center"><span class="bg-accent-green/20 text-accent-green px-3 py-1 rounded-full font-bold">✓ YES</span></td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">No</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">No</td>
+                            </tr>
+                            <tr class="hover:bg-secondary-gray/50 transition">
+                                <td class="border border-gray-700 px-6 py-3 text-white font-semibold">Crypto Tracing & Recovery</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center"><span class="bg-professional-red/20 text-professional-red px-3 py-1 rounded-full font-bold">✓ YES</span></td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">No</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">Limited</td>
+                            </tr>
+                            <tr class="hover:bg-secondary-gray/50 transition">
+                                <td class="border border-gray-700 px-6 py-3 text-white font-semibold">Mobile OS Exploitation (iOS/Android)</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center"><span class="bg-accent-green/20 text-accent-green px-3 py-1 rounded-full font-bold">✓ YES</span></td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">No</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">Basic</td>
+                            </tr>
+                            <tr class="hover:bg-secondary-gray/50 transition">
+                                <td class="border border-gray-700 px-6 py-3 text-white font-semibold">Kernel-Level Rootkit Detection</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center"><span class="bg-accent-green/20 text-accent-green px-3 py-1 rounded-full font-bold">✓ YES</span></td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">No</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">Limited</td>
+                            </tr>
+                            <tr class="hover:bg-secondary-gray/50 transition">
+                                <td class="border border-gray-700 px-6 py-3 text-white font-semibold">Advanced Malware Reverse Engineering</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center"><span class="bg-accent-green/20 text-accent-green px-3 py-1 rounded-full font-bold">✓ YES</span></td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">No</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">Limited</td>
+                            </tr>
+                            <tr class="hover:bg-secondary-gray/50 transition">
+                                <td class="border border-gray-700 px-6 py-3 text-white font-semibold">Court-Admissible Forensic Reports</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center"><span class="bg-professional-red/20 text-professional-red px-3 py-1 rounded-full font-bold">✓ YES</span></td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">Limited</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">No</td>
+                            </tr>
+                            <tr class="hover:bg-secondary-gray/50 transition">
+                                <td class="border border-gray-700 px-6 py-3 text-white font-semibold">24/7 Emergency Response</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center"><span class="bg-accent-green/20 text-accent-green px-3 py-1 rounded-full font-bold">✓ YES</span></td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">Business Hours</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">Limited</td>
+                            </tr>
+                            <tr class="hover:bg-secondary-gray/50 transition">
+                                <td class="border border-gray-700 px-6 py-3 text-white font-semibold">Government Certified & Authorized</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center"><span class="bg-professional-red/20 text-professional-red px-3 py-1 rounded-full font-bold">✓ YES</span></td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">Limited</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">No</td>
+                            </tr>
+                            <tr class="hover:bg-secondary-gray/50 transition">
+                                <td class="border border-gray-700 px-6 py-3 text-white font-semibold">FBI Partnership & Legal Authority</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center"><span class="bg-professional-red/20 text-professional-red px-3 py-1 rounded-full font-bold">✓ YES</span></td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">No</td>
+                                <td class="border border-gray-700 px-6 py-3 text-center text-gray-400">No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-12 text-center">
+                    <p class="text-gray-300 text-lg mb-6 font-semibold">
+                        **HACKITE is not another security firm. We are the definitive, no-compromise choice for those who demand results.**
+                    </p>
+                    <button onclick="openRosterModal()" class="px-12 py-4 text-xl font-extrabold rounded-full bg-accent-green text-primary-dark hover:bg-accent-hover transition duration-300 transform hover:scale-105 shadow-2xl uppercase inline-block">
+                        See Our Elite Roster Now
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- Final CTA (Call to Action) Section -->
         <section class="py-20 text-center bg-primary-dark">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -712,10 +1406,21 @@
                 <p class="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
                     Security breaches and financial fraud wait for no one. Secure your defenses or initiate a recovery pathway with the world's most dedicated team.
                 </p>
-                <!-- Final CTA Button (Calls Roster Modal) -->
-                <button onclick="openRosterModal()" class="px-12 py-5 text-2xl font-extrabold rounded-full bg-professional-red text-white hover:bg-professional-red/80 transition duration-300 transform hover:scale-105 shadow-2xl uppercase btn-pulse">
-                    ACTIVATE EMERGENCY RESPONSE
-                </button>
+                <!-- Final CTA Buttons -->
+                <div class="flex justify-center gap-6 flex-wrap">
+                    <button onclick="openRosterModal()" class="px-12 py-5 text-2xl font-extrabold rounded-full bg-professional-red text-white hover:bg-professional-red/80 transition duration-300 transform hover:scale-105 shadow-2xl uppercase btn-pulse">
+                        ACTIVATE EMERGENCY RESPONSE
+                    </button>
+                    <a href="https://wa.me/447914612850?text=URGENT%3A%20I%20need%20immediate%20cybersecurity%20assistance%20for%20a%20security%20breach%20or%20financial%20fraud%20recovery" 
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="px-12 py-5 text-2xl font-extrabold rounded-full whatsapp-cta text-white hover:shadow-[0_0_30px_rgba(0,208,132,0.6)] transition duration-300 transform hover:scale-105 shadow-2xl uppercase flex items-center gap-3 border-2 border-white/30">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.782 1.176l-.013 1.039c1.804-.275 3.527-.413 5.344-.413 1.817 0 3.54.138 5.344.413l-.013-1.039a9.847 9.847 0 00-5.476-1.176zm0-2.588c5.355 0 9.704 3.957 9.704 8.888 0 4.93-4.35 8.887-9.704 8.887-5.355 0-9.704-3.957-9.704-8.887 0-4.93 4.35-8.888 9.704-8.888z"/>
+                        </svg>
+                        WHATSAPP EMERGENCY CHAT
+                    </a>
+                </div>
             </div>
         </section>
     </main>
@@ -723,11 +1428,12 @@
     <!-- Footer -->
     <footer class="bg-secondary-gray/50 border-t border-accent-green/50 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                 
                 <div>
                     <h5 class="text-xl font-bold text-accent-green mb-4 tech-shadow">HACKITE</h5>
                     <p class="text-gray-400 text-sm">Elite Security Audits & Legal Digital Forensics. Transforming Offensive Mastery into Definitive Defense.</p>
+                    <p class="text-gray-500 text-xs mt-4">🏆 Government Approved | 🛡️ ISO 27001 Certified | 🇬🇧 UK ICO Authorized</p>
                 </div>
                 <div>
                     <h5 class="text-lg font-semibold text-white mb-4">Core Services</h5>
@@ -736,6 +1442,7 @@
                         <li><a href="#asset-recovery" class="text-professional-red hover:text-accent-green transition duration-200 hover:scale-[1.03] font-bold">Financial Asset Recovery</a></li>
                         <li><a href="#roster" class="text-gray-400 hover:text-accent-green transition duration-200 hover:scale-[1.03]">Cloud Security Audits</a></li>
                         <li><a href="#roster" class="text-gray-400 hover:text-accent-green transition duration-200 hover:scale-[1.03]">Mobile App Testing</a></li>
+                        <li><a href="#roster" class="text-gray-400 hover:text-accent-green transition duration-200 hover:scale-[1.03]">Device Monitoring</a></li>
                     </ul>
                 </div>
                 <div>
@@ -744,6 +1451,7 @@
                         <li><a href="#about" class="text-gray-400 hover:text-accent-green transition duration-200 hover:scale-[1.03]">Ethical Mandate</a></li>
                         <li><a href="#success-stories" class="text-gray-400 hover:text-accent-green transition duration-200 hover:scale-[1.03]">Success Stories</a></li>
                         <li><a href="#process" class="text-gray-400 hover:text-accent-green transition duration-200 hover:scale-[1.03]">Engagement Process</a></li>
+                        <li><a href="#asset-recovery" class="text-professional-red hover:text-accent-green transition duration-200 hover:scale-[1.03] font-bold">Asset Recovery</a></li>
                     </ul>
                 </div>
                 <div>
@@ -752,18 +1460,358 @@
                         <li><a href="#" class="text-gray-400 hover:text-professional-red transition duration-200 hover:scale-[1.03]">Terms of Service</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-professional-red transition duration-200 hover:scale-[1.03]">Privacy Policy</a></li>
                         <li><a href="mailto:contact@hackite.com" class="text-gray-400 hover:text-accent-green transition duration-200 hover:scale-[1.03]">contact@hackite.com</a></li>
+                        <li><a href="https://wa.me/447914612850" class="text-green-400 hover:text-accent-green transition duration-200 hover:scale-[1.03] font-semibold">WhatsApp: +447914612850</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="mt-12 pt-8 border-t border-gray-700 text-center">
-                <p class="text-gray-500 text-sm">&copy; 2021 HACKITE, Inc. All Rights Reserved. All services are strictly ethical, authorized, and legally compliant.</p>
+                <p class="text-gray-500 text-sm">&copy; 2024 HACKITE, Inc. All Rights Reserved. All services are strictly ethical, authorized, and legally compliant. | FBI Partnership | EU GDPR Certified | UK ICO Approved</p>
             </div>
         </div>
     </footer>
+
+    <!-- Floating Social Media Buttons with Enhanced UI -->
+    <div class="fixed bottom-8 right-8 flex flex-col gap-3 z-50">
+        <!-- LIVE CHAT BUTTON -->
+        <div class="group relative">
+            <button onclick="alert('Live chat widget would connect to your support team here!')" 
+               class="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white shadow-2xl hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] transform hover:scale-110 transition duration-300 ease-in-out border-2 border-blue-300 pulse-urgent"
+               title="Chat with our support team">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 12a4 4 0 118 0 4 4 0 01-8 0zm9-5a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+            </button>
+            <div class="absolute bottom-20 right-0 bg-gradient-to-r from-gray-900 to-gray-800 text-white px-4 py-3 rounded-lg font-semibold text-sm whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-blue-400/50">
+                Live Chat Support
+            </div>
+        </div>
+
+        <!-- WhatsApp Button - Premium Style -->
+        <div class="group relative">
+            <a href="https://wa.me/447914612850?text=Hello%20HACKITE%20Team%2C%20I%20need%20your%20expert%20cybersecurity%20services" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white shadow-2xl hover:shadow-[0_0_30px_rgba(34,197,94,0.6)] transform hover:scale-110 transition duration-300 ease-in-out border-2 border-green-300 pulse-urgent"
+               title="Chat with us on WhatsApp: +447914612850">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.782 1.176l-.013 1.039c1.804-.275 3.527-.413 5.344-.413 1.817 0 3.54.138 5.344.413l-.013-1.039a9.847 9.847 0 00-5.476-1.176zm0-2.588c5.355 0 9.704 3.957 9.704 8.888 0 4.93-4.35 8.887-9.704 8.887-5.355 0-9.704-3.957-9.704-8.887 0-4.93 4.35-8.888 9.704-8.888z"/>
+                </svg>
+            </a>
+            <div class="absolute bottom-20 right-0 bg-gradient-to-r from-gray-900 to-gray-800 text-white px-4 py-3 rounded-lg font-semibold text-sm whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-green-400/50">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.782 1.176l-.013 1.039c1.804-.275 3.527-.413 5.344-.413 1.817 0 3.54.138 5.344.413l-.013-1.039a9.847 9.847 0 00-5.476-1.176zm0-2.588c5.355 0 9.704 3.957 9.704 8.888 0 4.93-4.35 8.887-9.704 8.887-5.355 0-9.704-3.957-9.704-8.887 0-4.93 4.35-8.888 9.704-8.888z"/></svg>
+                    +447914612850
+                </div>
+            </div>
+        </div>
+
+        <!-- Twitter Button -->
+        <div class="group relative">
+            <a href="https://twitter.com/intent/tweet?text=Check%20out%20HACKITE%20-%20Elite%20Cybersecurity%20Experts&url=https://hackite.com" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white shadow-2xl hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] transform hover:scale-110 transition duration-300 ease-in-out border-2 border-blue-300"
+               title="Follow us on Twitter">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 9 0 9 0z"/>
+                </svg>
+            </a>
+            <div class="absolute bottom-20 right-0 bg-gradient-to-r from-gray-900 to-gray-800 text-white px-4 py-3 rounded-lg font-semibold text-sm whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-blue-400/50">
+                Follow HACKITE
+            </div>
+        </div>
+
+        <!-- TikTok Button -->
+        <div class="group relative">
+            <a href="https://www.tiktok.com/@hackite" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-gray-800 to-black hover:from-gray-900 hover:to-gray-950 text-white shadow-2xl hover:shadow-[0_0_30px_rgba(255,0,127,0.6)] transform hover:scale-110 transition duration-300 ease-in-out border-2 border-pink-500"
+               title="Follow us on TikTok">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.1 1.82 2.89 2.89 0 0 1 5.1-1.82V9.4a6.84 6.84 0 0 0 6.1 3.91v-3.1a4.77 4.77 0 0 1-.62-.04z"/>
+                </svg>
+            </a>
+            <div class="absolute bottom-20 right-0 bg-gradient-to-r from-gray-900 to-gray-800 text-white px-4 py-3 rounded-lg font-semibold text-sm whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-pink-500/50">
+                Follow HACKITE
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional WhatsApp Contact Styles -->
+    <style>
+        @keyframes float-pulse {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-pulse {
+            animation: float-pulse 2s ease-in-out infinite;
+        }
+
+        .whatsapp-cta {
+            background: linear-gradient(135deg, #00D084 0%, #00BA63 100%);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-cta:hover {
+            box-shadow: 0 0 30px rgba(0, 208, 132, 0.6);
+            transform: scale(1.05);
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            position: fixed;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #181818 0%, #050505 100%);
+            z-index: 99;
+            transition: left 0.3s ease-in-out;
+            overflow-y: auto;
+            padding-top: 80px;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu-item {
+            display: block;
+            padding: 16px 24px;
+            color: #00FF7F;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(0, 255, 127, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-item:hover {
+            background: rgba(0, 255, 127, 0.1);
+            padding-left: 32px;
+        }
+
+        /* Live Chat Widget Styles */
+        .chat-widget {
+            position: fixed;
+            bottom: 120px;
+            right: 32px;
+            width: 320px;
+            height: 450px;
+            background: linear-gradient(135deg, #181818 0%, #0a0a0a 100%);
+            border: 2px solid #00FF7F;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 255, 127, 0.3);
+            display: none;
+            z-index: 98;
+            flex-direction: column;
+            animation: slideUp 0.3s ease-in-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .chat-widget.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(90deg, #00FF7F 0%, #00CC66 100%);
+            color: #000;
+            padding: 16px;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: #000;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .message {
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .message.bot {
+            background: rgba(0, 255, 127, 0.1);
+            color: #00FF7F;
+            border-left: 3px solid #00FF7F;
+        }
+
+        .message.user {
+            background: rgba(0, 255, 127, 0.2);
+            color: #fff;
+            border-left: 3px solid #FF3333;
+            text-align: right;
+        }
+
+        .chat-input {
+            border-top: 1px solid rgba(0, 255, 127, 0.2);
+            padding: 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            background: rgba(0, 255, 127, 0.1);
+            border: 1px solid #00FF7F;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .chat-input input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .chat-input button {
+            background: linear-gradient(90deg, #00FF7F 0%, #00CC66 100%);
+            color: #000;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .chat-input button:hover {
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.6);
+        }
+    </style>
+
+    <!-- JavaScript for Enhanced Interactivity -->
+    <script>
+        // Mobile Menu Functionality
+        function toggleMobileMenu() {
+            const menu = document.querySelector('.mobile-menu');
+            if (menu) {
+                menu.classList.toggle('active');
+            }
+        }
+
+        // Close menu when clicking on a link
+        function closeMobileMenuOnLink() {
+            const menuItems = document.querySelectorAll('.mobile-menu-item');
+            const menu = document.querySelector('.mobile-menu');
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (menu) menu.classList.remove('active');
+                });
+            });
+        }
+
+        // Live Chat Widget Functionality
+        function toggleChatWidget() {
+            const chatWidget = document.querySelector('.chat-widget');
+            if (chatWidget) {
+                chatWidget.classList.toggle('active');
+            }
+        }
+
+        function closeChatWidget() {
+            const chatWidget = document.querySelector('.chat-widget');
+            if (chatWidget) {
+                chatWidget.classList.remove('active');
+            }
+        }
+
+        // Send chat message
+        function sendChatMessage() {
+            const input = document.querySelector('.chat-input input');
+            const messagesContainer = document.querySelector('.chat-messages');
+            
+            if (input && input.value.trim() && messagesContainer) {
+                // Add user message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user';
+                userMessage.textContent = input.value;
+                messagesContainer.appendChild(userMessage);
+
+                // Simulate bot response
+                setTimeout(() => {
+                    const botMessage = document.createElement('div');
+                    botMessage.className = 'message bot';
+                    botMessage.textContent = 'Thanks for reaching out! Our team will respond shortly on WhatsApp: +447914612850';
+                    messagesContainer.appendChild(botMessage);
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }, 500);
+
+                input.value = '';
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+        }
+
+        // Scroll smooth behavior for anchor links
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        }
+
+        // Initialize on document ready
+        document.addEventListener('DOMContentLoaded', function() {
+            closeMobileMenuOnLink();
+            setupSmoothScroll();
+
+            // Add Enter key support for chat input
+            const chatInput = document.querySelector('.chat-input input');
+            if (chatInput) {
+                chatInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendChatMessage();
+                    }
+                });
+            }
+        });
+
+        // Update scroll progress bar
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrollPercent + '%';
+            }
+
+            // Update visitor counter with scroll-based animation
+            const counter = document.querySelector('.visitor-counter');
+            if (counter && scrollPercent > 20) {
+                counter.style.opacity = '1';
+            }
+        });
+    </script>
 </body>
 </html>
-
 
 
 
